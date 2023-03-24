@@ -7,7 +7,7 @@ if __name__ == '__main__':
     while True:
         print(MenuView.getMainMenu())
         print(MenuView.getExitMenu())
-        selected = input('메뉴 번호를 입력하세요.: ')
+        selected = input('메뉴 번호를 입력하세요. : ')
         if selected == 'q':
             print('시스템이 종료 되었습니다.')
             break
