@@ -1,4 +1,5 @@
 from src.com.python.Authentication.security.PrincipalUser import PrincipalUser
+from src.com.python.Authentication.main.MyPage import MyPage
 
 class Home:
 
@@ -14,7 +15,7 @@ class Home:
             print("====================")
             select = input("Menu Selected : ")
             if select == '1':
-                pass
+                MyPage.myPage()
             elif select == '2':
                 pass
             elif select == '3':

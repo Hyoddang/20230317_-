@@ -6,12 +6,9 @@ class SignUp:
     @staticmethod
     def signUp():
 
-        while True:
-            select = input("회원가입에 동의 하십니까? 계속 하려면 (Y/y) 입력, 취소 하려면 아무키나 입력 : ")
-            if select == 'Y' or select == 'y':
-               break
-            else:
-                return
+        select = input("회원가입에 동의 하십니까? 계속 하려면 (Y/y) 입력, 취소 하려면 아무키나 입력 : ")
+        if select != 'Y' and select != 'y':
+            return
 
         username = None
         password = None

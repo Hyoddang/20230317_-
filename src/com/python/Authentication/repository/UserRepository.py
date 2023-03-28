@@ -42,12 +42,33 @@ class UserRepository:
 
     @classmethod
     def updateUser(cls, user):
-        pass
+        connection = DBConnectionConfig.getConnection()
+        cursor = connection.cursor(pymysql.cursors.DictCursor)
+        sql = '''
+            update user
+            set
+                password = %s,
+                name = %s,
+                email = %s
+            where
+                username = %s
+        '''
+        cursor.execute(sql, (user.password, user.name, user.email, user.username))
+        connection.commit()                   ## 데이터가 업데이트 되었다는걸 적용하는 명령어 필수*
 
     @classmethod
     def removeUserByUsername(cls, username):
-        pass
-
+        connetion = DBConnectionConfig.getConnection()
+        cursor = connetion.cursor(pymysql.cursors.DictCursor)
+        sql ='''
+            delete
+            from
+                user
+            where
+                username = %s
+        '''
+        cursor.execute(sql, (username, ))
+        connetion.commit()
 
 if __name__ == '__main__':
     UserRepository.findUserByUsername('qwe')

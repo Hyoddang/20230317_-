@@ -1,5 +1,6 @@
 from src.com.python.Authentication.repository.UserRepository import UserRepository
 from src.com.python.Authentication.security.PrincipalUser import PrincipalUser
+
 class SignIn:
     @staticmethod
     def signIn():
