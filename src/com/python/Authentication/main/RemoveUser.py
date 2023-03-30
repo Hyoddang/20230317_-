@@ -1,6 +1,7 @@
+from src.com.python.Authentication.config.GlobalConfig import GlobalConfig
 from src.com.python.Authentication.security.PrincipalUser import PrincipalUser
 from src.com.python.Authentication.repository.UserRepository import UserRepository
-from src.com.python.Authentication.main.Main import Main
+
 
 class RemoveUser:
 
@@ -13,4 +14,4 @@ class RemoveUser:
         UserRepository.removeUserByUsername(PrincipalUser.session.get('username'))
         PrincipalUser.clearSession()
         print('회원 탈퇴 완료.')
-        Main.main()
+        GlobalConfig.stopLoop()

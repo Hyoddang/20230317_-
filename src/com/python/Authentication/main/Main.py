@@ -1,12 +1,14 @@
 from src.com.python.Authentication.main.SignUp import SignUp
 from src.com.python.Authentication.main.SignIn import SignIn
 from src.com.python.Authentication.main.Home import Home
+from src.com.python.Authentication.config.GlobalConfig import GlobalConfig
 
 class Main:
 
     @staticmethod
     def main():
         while True:
+            GlobalConfig.addLoopFlagList()
             print("=====<<  Python Auth  >>=====")
             print("1. 로그인")
             print("2. 회원가입")

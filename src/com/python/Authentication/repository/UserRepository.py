@@ -21,15 +21,19 @@ class UserRepository:
         cursor = connection.cursor(pymysql.cursors.DictCursor)
         sql = f'''
             select
-                user_id,
-                username,
-                password,
-                name,
-                email
+                u.user_id,
+                u.username,
+                u.password,
+                u.name,
+                u.email,
+                ud.phone,
+                ud.address,
+                ud.gender
             from
-                user
+                user u
+                left outer join user_detail ud on(ud.user_id = u.user_id);
             where
-                username = %s
+                u.username = %s
         '''
         cursor.execute(sql, (username, ))
         rs = cursor.fetchone()
@@ -70,10 +74,49 @@ class UserRepository:
         cursor.execute(sql, (username, ))
         connetion.commit()
 
+
+    @classmethod
+    def updateUserDetail(cls, userDetail):
+        connection = DBConnectionConfig.getConnection()
+        cursor = connection.cursor(pymysql.cursors.DictCursor)
+        sql = '''
+            update user_detail
+            set
+                phone = %s,
+                address = %s,
+                gender = %s
+            where
+                user_id = %s
+        '''
+        cursor.execute(sql, (userDetail.phone, userDetail.address, userDetail.gender, userDetail.userId))
+        connection.commit()
+
+    @classmethod
+    def getUsers(cls):
+        connection = DBConnectionConfig.getConnection()
+        cursor = connection.cursor(pymysql.cursors.DictCursor)
+        sql = f'''
+                    select
+                        u.user_id,
+                        u.username,
+                        u.password,
+                        u.name,
+                        u.email,
+                        ud.phone,
+                        ud.address,
+                        ud.gender
+                    from
+                        user u
+                        left outer join user_detail ud on(ud.user_id = u.user_id);
+                '''
+        cursor.execute(sql)
+        rs = cursor.fetchall()
+
+        return rs
+
+
+
+
 if __name__ == '__main__':
-    UserRepository.findUserByUsername('qwe')
-
-
-
-
+    print(UserRepository.getUsers())
 
