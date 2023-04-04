@@ -1,7 +1,7 @@
 from src.com.python.Authentication.config.GlobalConfig import GlobalConfig
 from src.com.python.Authentication.security.PrincipalUser import PrincipalUser
 from src.com.python.Authentication.main.MyPage import MyPage
-
+from src.com.python.Authentication.main.userListPage.UserList import UserList
 
 class Home:
 
@@ -20,7 +20,7 @@ class Home:
             if select == '1':
                 MyPage.myPage()
             elif select == '2':
-                pass
+                UserList.userList()
             elif select == '3':
                 PrincipalUser.clearSession()
                 break

@@ -31,7 +31,7 @@ class UserRepository:
                 ud.gender
             from
                 user u
-                left outer join user_detail ud on(ud.user_id = u.user_id);
+                left outer join user_detail ud on(ud.user_id = u.user_id)
             where
                 u.username = %s
         '''
@@ -40,9 +40,6 @@ class UserRepository:
 
         return rs
 
-    @classmethod
-    def getUsers(cls):
-        pass
 
     @classmethod
     def updateUser(cls, user):
@@ -110,10 +107,39 @@ class UserRepository:
                         left outer join user_detail ud on(ud.user_id = u.user_id);
                 '''
         cursor.execute(sql)
-        rs = cursor.fetchall()
+        rs = cursor.fetchall()               ## fetchall 하면 리스트로 가져옴
 
         return rs
 
+    @classmethod
+    def searchUsers(cls, searchValue):
+        connection = DBConnectionConfig.getConnection()
+        cursor = connection.cursor(pymysql.cursors.DictCursor)
+        sql = f'''
+            select
+                u.user_id,
+                u.username,
+                u.password,
+                u.name,
+                u.email,
+                ud.phone,
+                ud.address,
+                ud.gender
+            from
+                user u
+                left outer join user_detail ud on(ud.user_id = u.user_id)
+            where
+                u.username like '%{searchValue}%'
+            or	u.name like '%{searchValue}%'
+            or	u.email like '%{searchValue}%'
+            or	ud.phone like '%{searchValue}%'
+            or ud.address like '%{searchValue}%'
+            or ud.gender like '%{searchValue}%'
+        '''
+        cursor.execute(sql)
+        rs = cursor.fetchall()
+
+        return rs
 
 
 

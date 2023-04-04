@@ -8,14 +8,13 @@ class Main:
     @staticmethod
     def main():
         while True:
-            GlobalConfig.addLoopFlagList()
+            GlobalConfig.initLoopFlag()
             print("=====<<  Python Auth  >>=====")
             print("1. 로그인")
             print("2. 회원가입")
             print("q. 프로그램 종료")
             print("=============================")
             select = input("Menu Selected : ")
-
             if select == 'q':
                 print("프로그램이 종료 되었습니다.")
                 break
